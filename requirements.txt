@@ -1,5 +1,2 @@
 requests
 demjson
-folium
-csv
-statistics
