@@ -3,10 +3,12 @@ import folium
 import csv
 import pandas as pd
 import statistics as st
-
+from datetime import datetime as dt
+start=dt.now()
 bike_point_list=[]
 longitude_list=[]
 latitude_list=[]
+print('Generating map...')
 
 count=0
 with open('../data/combined_data.tsv') as tsvfile:
@@ -37,3 +39,5 @@ for i in range(0,len(data)):
 # Save it as html
 m.save('bike_Brussels-points-map.html')
 
+print('bike_Brussels-points-map.html file already generated')
+print(dt.now()-start)
