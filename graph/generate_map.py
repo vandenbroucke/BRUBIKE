@@ -39,5 +39,5 @@ for i in range(0,len(data)):
 # Save it as html
 m.save('bike_Brussels-points-map.html')
 
-print('bike_Brussels-points-map.html file already generated')
+print('The bike_Brussels-points-map.html file was already generated')
 print(dt.now()-start)
