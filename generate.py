@@ -13,7 +13,7 @@ COMBINED_OUTPUT_PATH ='./data/combined_data.tsv'
 if __name__ == "__main__":    
     device_service =  DeviceService(DEVICES_INPUT_PATH,True)
     #Fetch and parse all device measurements
-    device_measurements =  device_service.get_measurements_from_all_devices("20180101","20190311")    
+    device_measurements =  device_service.get_measurements_from_all_devices("20180101","20190518")    
     #Store raw device measurements
     with open(BIKE_OUTPUT_PATH, 'w') as file:
         file.write('device_name\tlatitude\tlongitude\ttimestamp_from\ttimestamp_until\tbike_count\tbike_avg_speed\n')
@@ -23,7 +23,7 @@ if __name__ == "__main__":
     
     weather_service = WeatherService(True)
     #Fetch and parse all weather measurements
-    weather_measurements = weather_service.get_meteo_for_interval(date(2018,12,6),date(2019,3,11),'brussels')
+    weather_measurements = weather_service.get_meteo_for_interval(date(2018,12,6),date(2019,5,18),'brussels')
     
     #Store raw weather measurements
     with open(WEATHER_OUTPUT_PATH, 'w') as file:

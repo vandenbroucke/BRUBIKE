@@ -1,2 +1,8 @@
 requests
 demjson
+tensorflow-gpu
+numpy
+pandas
+matplotlib
+scikit-learn
+
