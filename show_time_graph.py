@@ -1,4 +1,3 @@
-
 import matplotlib.pyplot as plt
 import os
 import pandas as pd
@@ -95,7 +94,7 @@ def show_data_real_timestamp_bikes_list(data,time_start,time_end):
 	print((list_vals[0:24]))
 
 	input()'''
-	days=7
+	days=28
 	for i in range(0,int(len(result_list)/(96*days))):
 
 		plt.plot(result_list[i*96*days:i*96*days+96*days], 'g', alpha=0.7)
@@ -113,21 +112,22 @@ def show_data_real_timestamp_bikes_list(data,time_start,time_end):
 	figManager = plt.get_current_fig_manager()
 	figManager.full_screen_toggle() 
 	plt.show()
-
-timestamp_highest_value	=1560894300
-timestamp_lowest_value=1557093600
+def obtain_latitudes_list(latitude_data):	
+	return latitude_data.unique()
+	
 
 #Variables
 dataset_all_points=pd.read_csv("combined_data.tsv", delimiter="\t",header=0)
+latitudes_list=obtain_latitudes_list(dataset_all_points.latitude)
 timestamp_highest_value	=higher_value(dataset_all_points['timestamp_from'])
 timestamp_lowest_value=min_value(dataset_all_points['timestamp_from'])
 all_data_we_have=0
-longitudes_list=[50.853629999999995,50.82284,50.82448,50.84337,50.84048,50.88185,50.8392,50.82029,50.84357]
-for longitude in longitudes_list:
-	dataset=select_data_from_lat_csv(dataset_all_points,longitude)
+
+for latitude in latitudes_list:
+	dataset=select_data_from_lat_csv(dataset_all_points,latitude)
 	
 
-	print("Pole data on point "+str(longitude))
+	print("Pole data on point "+str(latitude))
 	'''print("Min timestamp "+str(min_value(dataset['timestamp_from'])))
 	print(dt.fromtimestamp(min_value(dataset['timestamp_from'])))
 	print("Max timestamp "+str((higher_value(dataset['timestamp_from']))))
