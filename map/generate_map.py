@@ -31,7 +31,7 @@ def GENERATE_MAP_MAIN_FUNCTION(path='./data/combined_data.tsv'):
 
 
 	# Make an empty map
-	m = folium.Map(location=[st.mean(longitude_list), st.mean(latitude_list)], tiles="OpenStreetMap", zoom_start=11.5)
+	m = folium.Map(location=[st.mean(longitude_list), st.mean(latitude_list)], tiles="Stamen Terrain", zoom_start=11.5)
 	 
 	# I can add marker one by one on the map
 	for i in range(0,len(data)):
