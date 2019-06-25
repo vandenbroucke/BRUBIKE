@@ -2,6 +2,9 @@ import pandas as pd
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
 import matplotlib.pyplot as plt
+import json
+import requests
+from datetime import datetime as dt
 def check_if_the_tsv_hot_file_already_has_processed_columns(csv_file_path):
 	df = pd.read_csv(csv_file_path,delimiter="\t")
 	try:
@@ -115,3 +118,53 @@ def evaluate_model_and_show_graph(x_test,y_test,model,y_scaler):
     l2, = plt.plot(y_pred_scaled, 'r', alpha=0.7)
     plt.legend(['Ground truth', 'Predicted'])
     plt.show()
+
+def return_time_slice_column_value(timestamp,time_slice_day):
+	
+	date=dt.fromtimestamp(timestamp)
+	seconds_day=(date - date.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()	
+	window_time=86400/time_slice_day	
+	return int(seconds_day/window_time)
+def return_proper_weather_condition(weather_cond):
+	
+	return_string='Clear.'
+	if weather_cond=='Mostly Sunny':
+		return_string='Sunny.'
+	if weather_cond=='Cloudy':
+		return_string='Cloudy.'
+	if weather_cond=='Mostly Cloudy':
+		return_string='Cloudy.'
+	if weather_cond=='Partly Cloudy':
+		return_string='Partly cloudy.'
+	if weather_cond=='Mostly Clear':
+		return_string='Clear.'
+	
+	return return_string
+def obtain_latitudes_long_list(path='./data/devices.json'):	
+	lat_long_list=[]
+	with open(path) as json_file:
+		data=json.load(json_file)
+		for row in data:
+			lat_long_list.append(row['geo'])			
+	return lat_long_list
+
+def obtain_next_dates_data(start_date,end_date):    
+    combined_start_time=dt.timestamp(dt.combine(start_date,dt.min.time()))
+    combined_end_time=dt.timestamp(dt.combine(end_date,dt.min.time()))   
+    device="N"    
+    Next_dates_PATH = './data/next_dates_data.tsv'
+    with open(Next_dates_PATH, 'w') as file:
+        file.write('device_name\tlatitude\tlongitude\ttimestamp_from\ttimestamp_until\tbike_count\tbike_avg_speed\tweather_timestamp\ttemperature\tweather_condition\twind_speed\twind_direction\thumidity\tbarometer\tvisibility\ttime_window\n')
+        lat_long_list=obtain_latitudes_long_list()
+        for lat_long_row in lat_long_list:
+            latitude=lat_long_row[0] 
+            longitude=lat_long_row[1] 
+            time=24 
+            #https://api.aerisapi.com/forecasts/50.82448,4.393893?from=1561672800&to=1561755600&filter=1hr&
+            api_url='https://api.aerisapi.com/forecasts/'+str(latitude)+','+str(longitude)+'?from='+str(combined_start_time)+'&to='+str(combined_end_time)+'&filter=1hr&client_id=6mzRG6y1n6A6Dy3lQXRPT&client_secret=UP3GNV20hMBGP5CLnzyO8SSt51HpX0qSKeNEuEBx'
+            print(api_url)
+            data = requests.get(api_url).json()['response'][0]['periods']
+            for row in data:
+	            file.write('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format(device,latitude,longitude,row['timestamp'],row['timestamp'],0,15,row['timestamp'],row['avgTempC'],return_proper_weather_condition(row['weather']),row['windSpeedKPH'],row['windDir'],row['humidity'],row['pressureMB'],0,return_time_slice_column_value(int(row['timestamp']),24)))
+	            #print(row)
+
