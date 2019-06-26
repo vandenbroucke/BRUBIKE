@@ -7,6 +7,7 @@ import requests
 from datetime import datetime as dt
 def check_if_the_tsv_hot_file_already_has_processed_columns(csv_file_path):
 	df = pd.read_csv(csv_file_path,delimiter="\t")
+	return False
 	try:
 		total_rows=len(df.Sunny)
 		return True
@@ -158,7 +159,7 @@ def add_lost_columns(path,columns_name_list):
 		df[col] = new_list
 		df.to_csv(path,sep='\t',index=False)
 def create_on_hot_next_dates_file(path, new_path):	
-	add_lost_columns(path,['Ice fog', 'Snow flurries', 'Light fog' ,'Quite cool','Rain','Sleet','Haze','Freezing rain','Cool','Fog','Light rain','Light freezing rain','Cloudy','Light snow','Chilly','Drizzle','Low clouds','Rain showers','Snow','Scattered showers','Snow showers','Hail','Thundershowers','Sprinkles','Thunderstorms','Partly sunny','Partly cloudy','Scattered clouds','Broken clouds','Passing clouds'])    
+	add_lost_columns(path,['Ice fog', 'Snow flurries', 'Light fog' ,'Quite cool','Rain','Sleet','Haze','Freezing rain','Cool','Fog','Light rain','Light freezing rain','Cloudy','Light snow','Chilly','Drizzle','Low clouds','Rain showers','Snow','Scattered showers','Snow showers','Hail','Thundershowers','Sprinkles','Thunderstorms','Partly sunny','Partly cloudy','Scattered clouds','Broken clouds','Passing clouds','Sunny','Clear'])    
 	from shutil import copyfile	
 	copyfile(path, new_path)
 
@@ -183,4 +184,5 @@ def obtain_next_dates_data(start_date,end_date):
 	            file.write('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format(device,latitude,longitude,row['timestamp'],row['timestamp'],10,15,row['timestamp'],row['avgTempC'],return_proper_weather_condition(row['weather']),row['windSpeedKPH'],row['windDir'],row['humidity'],row['pressureMB'],0,return_time_slice_column_value(int(row['timestamp']),24)))
 	            #print(row)
     create_on_hot_next_dates_file('./data/next_dates_data.tsv','./data/next_dates_data_one_hot_data.tsv')
+
 
