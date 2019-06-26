@@ -178,11 +178,12 @@ def obtain_next_dates_data(start_date,end_date):
             time=24 
             #https://api.aerisapi.com/forecasts/50.82448,4.393893?from=1561672800&to=1561755600&filter=1hr&
             api_url='https://api.aerisapi.com/forecasts/'+str(latitude)+','+str(longitude)+'?from='+str(combined_start_time)+'&to='+str(combined_end_time)+'&filter=1hr&client_id=6mzRG6y1n6A6Dy3lQXRPT&client_secret=UP3GNV20hMBGP5CLnzyO8SSt51HpX0qSKeNEuEBx'
-            print(api_url)
+            print("Ghathering data for latitude: "+str(latitude)+" and longitude "+str(longitude)+' ...')
             data = requests.get(api_url).json()['response'][0]['periods']
             for row in data:
 	            file.write('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format(device,latitude,longitude,row['timestamp'],row['timestamp'],10,15,row['timestamp'],row['avgTempC'],return_proper_weather_condition(row['weather']),row['windSpeedKPH'],row['windDir'],row['humidity'],row['pressureMB'],0,return_time_slice_column_value(int(row['timestamp']),24)))
 	            #print(row)
     create_on_hot_next_dates_file('./data/next_dates_data.tsv','./data/next_dates_data_one_hot_data.tsv')
+    print("GATHERING PROCCESS FINISHED...!!!")
 
 

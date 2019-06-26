@@ -71,7 +71,7 @@ def GENERATE_HEAT_MAP(data, predicted_num_bikes):
     data_information=[]
     latitudes_list=[]
     longitudes_list=[]
-    rand_limits=0.01
+    rand_limits=0.0001
     for row in data.latitude:
         latitudes_list.append(row+random.uniform(-rand_limits,rand_limits))
     for row in data.longitude:
@@ -83,6 +83,6 @@ def GENERATE_HEAT_MAP(data, predicted_num_bikes):
 
     m = folium.Map([st.mean(latitudes_list), st.mean(longitudes_list)], tiles='OpenStreetMap', zoom_start=11.5)
 
-    HeatMap(data_information).add_to(m)
+    HeatMap(data_information,max_opacity=0.4).add_to(m)
 
     m.save('./map/forecasting_ap.html')
