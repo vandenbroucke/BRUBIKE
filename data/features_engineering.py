@@ -108,13 +108,18 @@ def add_row_time_series_column_to_csv_file(csv_file_path,column_name,time_slice_
 	
 	df[column_name] = time_list
 	df.to_csv(csv_file_path,sep='\t',index=False)
+def return_time_slice_day_of_week_column_value(timestamp,time_slice_day):
+	date=dt.fromtimestamp(timestamp)
+	
+	return date.weekday()
+	
 def add_row_day_of_week_time_series_column_to_csv_file(csv_file_path,column_name,time_slice_day):
 	
 	df = pd.read_csv(csv_file_path,delimiter="\t")
 	total_rows=len(df.timestamp_from)
 	time_list=[]
 	for i in range(0,total_rows):
-		time_list.append(return_time_slice_column_value(df.timestamp_from[i],time_slice_day))
+		time_list.append(return_time_slice_day_of_week_column_value(df.timestamp_from[i],time_slice_day))
 	
 	df[column_name] = time_list
 	df.to_csv(csv_file_path,sep='\t',index=False)
@@ -145,6 +150,7 @@ def TIME_SERIES_FEATURES_ENGINEERING(csv_file_path="combined_data.tsv"):
 	time_slice_day=24	
 	
 	add_row_time_series_column_to_csv_file(csv_file_path,"time_window",time_slice_day)
+	add_row_day_of_week_time_series_column_to_csv_file(csv_file_path,"time_day_of_week_window",time_slice_day)
 
 #WEATHER_CONDITIONS_FEATURES_ENG()
 #TIME_SERIES_FEATURES_ENGINEERING()
