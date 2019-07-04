@@ -91,14 +91,15 @@ def weather_conditions_features_engineering(path):
 def return_time_slice_column_value(timestamp,time_slice_day):
 	date=dt.fromtimestamp(timestamp)
 	seconds_day=(date - date.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()
-	print(date)
-	print(seconds_day)
+	#print(date)
+	#print(seconds_day)
 	window_time=86400/time_slice_day
 	#print(int(seconds_day/window_time))
 
 	return int(seconds_day/window_time)
 
 def add_row_time_series_column_to_csv_file(csv_file_path,column_name,time_slice_day):
+	print("line 102")
 	df = pd.read_csv(csv_file_path,delimiter="\t")
 	total_rows=len(df.timestamp_from)
 	time_list=[]
@@ -130,10 +131,10 @@ def WEATHER_CONDITIONS_FEATURES_ENG():
 		weather_conditions_features_engineering('../selection_techniques/combined_data.tsv')
 	else:
 		print("The file already has the features engineering columns")
-def TIME_SERIES_FEATURES_ENGINEERING():
-	time_slice_day=24
-	csv_file_path="combined_data.tsv"
+def TIME_SERIES_FEATURES_ENGINEERING(csv_file_path="combined_data.tsv"):
+	time_slice_day=24	
+	print(csv_file_path)
 	add_row_time_series_column_to_csv_file(csv_file_path,"time_window",time_slice_day)
 
 #WEATHER_CONDITIONS_FEATURES_ENG()
-TIME_SERIES_FEATURES_ENGINEERING()
+#TIME_SERIES_FEATURES_ENGINEERING()
