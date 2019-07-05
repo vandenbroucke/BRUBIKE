@@ -99,8 +99,7 @@ def return_time_slice_column_value(timestamp,time_slice_day):
 	return int(seconds_day/window_time)
 
 def add_row_time_series_column_to_csv_file(csv_file_path,column_name,time_slice_day):
-<<<<<<< HEAD
-	
+
 	df = pd.read_csv(csv_file_path,delimiter="\t")
 	total_rows=len(df.timestamp_from)
 	time_list=[]
@@ -115,9 +114,7 @@ def return_time_slice_day_of_week_column_value(timestamp,time_slice_day):
 	return date.weekday()
 def add_row_day_of_week_time_series_column_to_csv_file(csv_file_path,column_name,time_slice_day):
 	
-=======
-	print("line 102")
->>>>>>> parent of b1a950a... Creating add_row_day_of_week_time_series_column_to_csv_file on features engineering file.
+
 	df = pd.read_csv(csv_file_path,delimiter="\t")
 	total_rows=len(df.timestamp_from)
 	time_list=[]
