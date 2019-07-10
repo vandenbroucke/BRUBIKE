@@ -6,7 +6,7 @@
              </h1>
             <a
           class="github-button uk-align-right"
-          href="https://github.com/vandenbroucke/monefy-web"
+          href="https://github.com/vandenbroucke/BRUBIKE"
           data-size="large"
           data-show-count="true"
           aria-label="Star vandenbroucke/monefy-web on GitHub"
