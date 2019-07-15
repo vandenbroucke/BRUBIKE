@@ -4,10 +4,10 @@ from services.zip_service import ZipService
 from datetime import timedelta,date
 import json
 
-DEVICES_INPUT_PATH="./data/devices.json"
-BIKE_OUTPUT_PATH = './data/bike_data.tsv'
-WEATHER_OUTPUT_PATH ='./data/weather_data.tsv'
-COMBINED_OUTPUT_PATH ='./data/combined_data.tsv'
+DEVICES_INPUT_PATH="../data/devices.json"
+BIKE_OUTPUT_PATH = '../data/bike_data.tsv'
+WEATHER_OUTPUT_PATH ='../data/weather_data.tsv'
+COMBINED_OUTPUT_PATH ='../data/combined_data.tsv'
 
 
 if __name__ == "__main__":    
