@@ -141,7 +141,7 @@ def return_proper_weather_condition(weather_cond):
 		return_string='Clear.'
 	
 	return return_string
-def obtain_latitudes_long_list(path='./data/devices.json'):	
+def obtain_latitudes_long_list(path='.././data/devices.json'):	
 	lat_long_list=[]
 	with open(path) as json_file:
 		data=json.load(json_file)
@@ -168,7 +168,7 @@ def obtain_next_dates_data(start_date,end_date):
     combined_start_time=int(dt.timestamp(dt.combine(start_date,dt.min.time())))
     combined_end_time=int(dt.timestamp(dt.combine(end_date,dt.min.time())))   
     device="N"    
-    Next_dates_PATH = './data/next_dates_data.tsv'
+    Next_dates_PATH = '.././data/next_dates_data.tsv'
     with open(Next_dates_PATH, 'w') as file:
         file.write('device_name\tlatitude\tlongitude\ttimestamp_from\ttimestamp_until\tbike_count\tbike_avg_speed\tweather_timestamp\ttemperature\tweather_condition\twind_speed\twind_direction\thumidity\tbarometer\tvisibility\ttime_window\n')
         lat_long_list=obtain_latitudes_long_list()
@@ -183,7 +183,7 @@ def obtain_next_dates_data(start_date,end_date):
             for row in data:
 	            file.write('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format(device,latitude,longitude,row['timestamp'],row['timestamp'],10,15,row['timestamp'],row['avgTempC'],return_proper_weather_condition(row['weather']),row['windSpeedKPH'],row['windDir'],row['humidity'],row['pressureMB'],0,return_time_slice_column_value(int(row['timestamp']),24)))
 	            #print(row)
-    create_on_hot_next_dates_file('./data/next_dates_data.tsv','./data/next_dates_data_one_hot_data.tsv')
+    create_on_hot_next_dates_file('.././data/next_dates_data.tsv','.././data/next_dates_data_one_hot_data.tsv')
     print("GATHERING PROCCESS FINISHED...!!!")
 
 
