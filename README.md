@@ -36,17 +36,9 @@ The following table provides overlapping descriptions for the features presented
 
 
 ### Citation
-Please consider citing our work when using BRUBIKE (accepted, not yet published):
+Please consider citing our work when using BRUBIKE:
 ~~~~
-@INPROCEEDINGS{Vand1910:BRUBIKE,
-    AUTHOR="Steven {Vanden Broucke} and Luis Manuel {Vidal Piña} and Tien Huu Do and
-    Nikos Deligiannis",
-    TITLE="{BRUBIKE:} A Dataset of Bicycle Traffic and Weather Conditions for
-    Predicting Cycling Flow",
-    BOOKTITLE="2019 IEEE International Smart Cities Conference (ISC2) (IEEE ISC2 2019)",
-    ADDRESS="Casablanca, Morocco",
-    DAYS=13,
-    MONTH=oct,
-    YEAR=2019
-}
+@INPROCEEDINGS{9071764, author={S. V. {Broucke} and L. M. V. {Piña} and T. H. {Do} and N. {Deligiannis}}, booktitle={2019 IEEE International Smart Cities Conference (ISC2)}, title={BRUBIKE: A Dataset of Bicycle Traffic and Weather Conditions for Predicting Cycling Flow}, year={2019}, volume={}, number={}, pages={432-437},}
+
+S. V. Broucke, L. M. V. Piña, T. H. Do and N. Deligiannis, "BRUBIKE: A Dataset of Bicycle Traffic and Weather Conditions for Predicting Cycling Flow," 2019 IEEE International Smart Cities Conference (ISC2), Casablanca, Morocco, 2019, pp. 432-437.
 ~~~~
